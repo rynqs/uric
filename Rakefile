@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "uric"
   gem.homepage = "http://github.com/rynqs/uric"
   gem.license = "MIT"
-  gem.summary = %Q{one-line summary of your gem}
-  gem.description = %Q{longer description of your gem}
+  gem.summary = %Q{altanative URI Parser}
+  gem.description = %Q{Parse host, file-type, title from URI and attach an alias to host, file-type}
   gem.email = "cecilcat@gmail.com"
   gem.authors = ["rynqs"]
   gem.files = Rake::FileList.new('lib/**/*')

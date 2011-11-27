@@ -1,6 +1,20 @@
 = uric
 
-Description goes here.
+Parse host, file-type, title from URI and attach an alias to host, file-type
+
+== Usage
+require 'uric'
+obj = Uric::URI.new('http://www.example.com/hoge.pdf')
+p obj.host #=> "www.example.com" 
+p obj.type #=> "application/pdf" 
+obj.add_host_alias('www.example.com', 'Example')
+obj.add_type_alias('application/pdf', 'PDF file')
+p obj.host #=> "Example" 
+p obj.type #=> "PDF file"
+obj.path = 'https://github.com/'
+p obj.title #=> "GitHub - Social Coding"
+p obj.host #=> "github.com"
+p obj.type #=> ""
 
 == Contributing to uric
  
