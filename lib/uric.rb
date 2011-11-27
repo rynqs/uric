@@ -7,32 +7,33 @@ require 'yaml'
 module Uric
   class URI
     attr_accessor :path, :dic
+    @@dic = []
     def initialize(uri='')
       @path = uri
       dic_load
     end
 
     def host_origin 
-      @host_origin = Addressable::URI.parse(@path).host.to_s
+      Addressable::URI.parse(@path).host.to_s
     end
 
-    def file_origin
-      @file_origin = MIME::Types.type_for(@path)[0].to_s
+    def type_origin
+      MIME::Types.type_for(@path)[0].to_s
     end
 
     def host
-      if @dic["hosts"].has_key?(@host_origin)
-        @dic["hosts"][@host_origin] 
+      if @dic['hosts'].has_key?(self.host_origin)
+        @dic['hosts'][self.host_origin].to_s 
       else 
-        @hots_origin 
+        self.host_origin 
       end
     end
 
-    def file
-      if @dic["types"].has_key?(@file_origin)
-        @dic["types"][@file_origin]
+    def type
+      if @dic['types'].has_key?(self.type_origin)
+        @dic['types'][self.type_origin].to_s
       else
-        @file_origin
+        self.type_origin
       end
     end
 
@@ -48,16 +49,32 @@ module Uric
     end
     
     def add_host_alias(key, value)
-      add_alias(key, value, "hosts")
+      add_alias(key, value, 'hosts')
     end
 
     def add_type_alias(key, value)
-      add_alias(key, value, "types")
+      add_alias(key, value, 'types')
     end
 
     def add_alias(key, value, category)
       unless @dic[category].has_key?(key)
         @dic[category].store(key, value)
+        dic_reload
+      end
+      @dic[category][key]
+    end
+
+    def remove_host_alias(key)
+      remove_alias(key, 'hosts')
+    end
+
+    def remove_type_alias(key)
+      remove_alias(key, 'types')
+    end
+
+    def remove_alias(key, category)
+      if @dic[category].has_key?(key)
+        @dic[category].delete(key)
         dic_reload
       end
     end
@@ -79,15 +96,3 @@ module Uric
   end
 end
 
-if __FILE__ == $0
-  include Uric
-  rl = Uric::URI.new
-  p rl.host_origin
-  p rl.file_origin
-  p rl.host
-  p rl.file
-  p rl.title
-  p rl.dic
-  p rl.add_host_alias("test.url", "TestUrl")
-  p rl.add_type_alias("text/xml", "XML")
-end 
