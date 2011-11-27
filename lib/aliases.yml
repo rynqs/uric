@@ -1,0 +1,9 @@
+---
+hosts:
+  www.google.com: Google
+  www.mhlw.go.jp: MHLW
+  manuals.info.apple.com: Apple
+types:
+  text/html: HTML
+  application/pdf: PDF
+  text/xml: XML
