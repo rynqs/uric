@@ -82,11 +82,11 @@ module Uric
     end
 
     def dic_load
-      @dic = YAML.load_file('lib/aliases.yml')
+      @dic = YAML.load_file(File.join(File.dirname(__FILE__), 'aliases.yml'))
     end
 
     def dic_save
-      open('lib/aliases.yml', 'w') do |f|
+      open(File.join(File.dirname(__FILE__), 'aliases.yml'), 'w') do |f|
         f.write(YAML.dump(@dic))
       end
     end
