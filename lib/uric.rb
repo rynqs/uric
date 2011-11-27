@@ -59,7 +59,10 @@ module Uric
       unless @dic[category].has_key?(key)
         @dic[category].store(key, value)
         dic_reload
+      else
+        @dic[category][key] = value
       end
+      dic_reload
       @dic[category][key]
     end
 
