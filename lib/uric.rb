@@ -1,9 +1,7 @@
 require 'addressable/uri'
 require 'mime/types'
-require 'hpricot'
-require 'open-uri'
 require 'yaml'
-require 'kconv'
+require 'mechanize'
 
 module Uric
   class URI
@@ -40,8 +38,8 @@ module Uric
 
     def title
       begin
-        doc = Hpricot(open(Addressable::URI.parse(@path).normalize))
-        @title = doc.search('title').text
+        agent = Mechanize.new
+        @title = agent.get(Addressable::URI.parse(@path).normalize).title
       rescue => e
         STDERR.puts e
       rescue Timeout::Error => e

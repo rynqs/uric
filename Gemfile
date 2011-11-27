@@ -8,7 +8,7 @@ source "http://rubygems.org"
 
 gem "addressable"
 gem "mime-types"
-gem "hpricot"
+gem "mechanize"
 
 group :development do
   gem "shoulda", ">= 0"

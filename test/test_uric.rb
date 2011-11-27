@@ -6,6 +6,7 @@ require 'kconv'
 class TestUric < Test::Unit::TestCase
   def setup
     @pdf = Uric::URI.new('http://manuals.info.apple.com/ja_JP/Enterprise_Deployment_Guide_J.pdf')
+    @ruby = Uric::URI.new('http://www.ruby-lang.org/ja/')
   end
 
   def test_dic
@@ -14,6 +15,7 @@ class TestUric < Test::Unit::TestCase
 
   def test_object
     assert_not_nil(@pdf)
+    assert_not_nil(@ruby)
   end
 
   def test_host_origin
@@ -33,7 +35,9 @@ class TestUric < Test::Unit::TestCase
   end
 
   def test_title
-    assert_equal('', @pdf.title)
+    assert_nil(@pdf.title)
+    assert_not_nil(@ruby.title)
+    #assert_equal('', @ruby.title)
   end
 
   def test_host_alias
