@@ -1,5 +1,7 @@
 require 'helper'
 require 'uric'
+require 'kconv'
+# -*- encoding: utf-8 -*-
 
 class TestUric < Test::Unit::TestCase
   def setup
@@ -10,7 +12,7 @@ class TestUric < Test::Unit::TestCase
     assert_not_nil(@pdf.dic)
   end
 
-  def test_pdf
+  def test_object
     assert_not_nil(@pdf)
   end
 

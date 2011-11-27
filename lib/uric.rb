@@ -3,6 +3,7 @@ require 'mime/types'
 require 'hpricot'
 require 'open-uri'
 require 'yaml'
+require 'kconv'
 
 module Uric
   class URI
@@ -39,7 +40,7 @@ module Uric
 
     def title
       begin
-        doc = Hpricot(open(@path))
+        doc = Hpricot(open(Addressable::URI.parse(@path).normalize))
         @title = doc.search('title').text
       rescue => e
         STDERR.puts e
