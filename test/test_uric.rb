@@ -35,7 +35,7 @@ class TestUric < Test::Unit::TestCase
   end
 
   def test_title
-    assert_nil(@pdf.title)
+    assert_not_nil(@pdf.title)
     assert_not_nil(@ruby.title)
     #assert_equal('', @ruby.title)
   end

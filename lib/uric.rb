@@ -56,7 +56,7 @@ module Uric
         if page.respond_to?(:title)
           @title = page.title.to_s
         else
-          @title = nil
+          @title = self.file_name
         end
       rescue => e
         STDERR.puts e
@@ -65,6 +65,10 @@ module Uric
       end
     end
     
+    def file_name
+      File.basename(@path)
+    end
+
     def add_host_alias(key, value)
       add_alias(key, value, 'hosts')
     end
