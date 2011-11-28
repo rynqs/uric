@@ -5,19 +5,28 @@ require 'mechanize'
 
 module Uric
   class URI
-    attr_accessor :path, :dic
+    attr_accessor :dic
     @@dic = []
     def initialize(uri='')
       @path = uri
       dic_load
     end
 
+    def path_origin
+      @path
+    end
+
+    def path
+      agent = Mechanize.new
+      agent.get(Addressable::URI.parse(self.path_origin).normalize).uri.to_s
+    end
+      
     def host_origin 
-      Addressable::URI.parse(@path).host.to_s
+      Addressable::URI.parse(self.path).host.to_s
     end
 
     def type_origin
-      MIME::Types.type_for(@path)[0].to_s
+      MIME::Types.type_for(self.path)[0].to_s
     end
 
     def host
@@ -39,7 +48,12 @@ module Uric
     def title
       begin
         agent = Mechanize.new
-        @title = agent.get(Addressable::URI.parse(@path).normalize).title
+        page = agent.get(Addressable::URI.parse(self.path).normalize)
+        if page.respond_to?(:title)
+          @title = page.title.to_s
+        else
+          @title = nil
+        end
       rescue => e
         STDERR.puts e
       rescue Timeout::Error => e
