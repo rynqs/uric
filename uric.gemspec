@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "uric"
-  s.version = "0.2.1"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["rynqs"]
-  s.date = "2011-11-27"
+  s.date = "2011-11-28"
   s.description = "Parse host, file-type, title from URI and attach an alias to host, file-type"
   s.email = "cecilcat@gmail.com"
   s.extra_rdoc_files = [
