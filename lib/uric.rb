@@ -66,7 +66,7 @@ module Uric
     end
     
     def file_name
-      File.basename(@path)
+      File.basename(self.path)
     end
 
     def add_host_alias(key, value)
