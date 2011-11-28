@@ -3,6 +3,7 @@
 Parse host, file-type, title from URI and attach an alias to host, file-type
 
 0.3.0 extend short url
+0.3.1 bug fix
 
 == Usage
 require 'uric'

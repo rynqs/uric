@@ -21,6 +21,10 @@ module Uric
       agent.get(Addressable::URI.parse(self.path_origin).normalize).uri.to_s
     end
       
+    def path=(uri)
+      @path = uri
+    end
+
     def host_origin 
       Addressable::URI.parse(self.path).host.to_s
     end
